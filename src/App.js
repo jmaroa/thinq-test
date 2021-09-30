@@ -23,6 +23,15 @@ const initialState = {
   countriesStatus: FETCH_STATUSES.IDLE
 }
 
+const getNumberFormat = (value) => {
+  const formatConfig = {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }
+  return new Intl.NumberFormat('en-GB').format(value, formatConfig)
+}
+
 const reducer = ((state = initialState, action) => {
   switch(action.type) {
     case REDUCER_ACTIONS.SET_COUNTRIES: return { ...state, countries: action.payload }
@@ -96,7 +105,7 @@ function App() {
             resultKey => (
               <div key={resultKey} className="app-highlights-item">
                 <h2>{resultKey}</h2>
-                <p>{new Intl.NumberFormat('en-IN').format(totalResults[resultKey])}</p>
+                <p>{getNumberFormat(totalResults[resultKey])}</p>
               </div>
             )
           )
@@ -117,15 +126,15 @@ function App() {
                 <h2 className="col">{result.country}</h2>
                 <div className="col app-countries-row-item">
                   <h3>Cases</h3>
-                  <p>{new Intl.NumberFormat('en-IN').format(result.cases)}</p>
+                  <p>{getNumberFormat(result.cases)}</p>
                 </div>
                 <div className="col app-countries-row-item">
                   <h3>Deaths</h3>
-                  <p>{new Intl.NumberFormat('en-IN').format(result.deaths)}</p>
+                  <p>{getNumberFormat(result.deaths)}</p>
                 </div>
                 <div className="col app-countries-row-item">
                   <h3>Recovered</h3>
-                  <p>{new Intl.NumberFormat('en-IN').format(result.recovered)}</p>
+                  <p>{getNumberFormat(result.recovered)}</p>
                 </div>
               </div>
             )
