@@ -46,9 +46,11 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [filteredCountries, setFilteredCountries] = useState([])
   const [thereIsMoreToLoad, setThereIsMoreToLoad] = useState(false)
+  const INITIAL_LOAD_MORE_AMOUNT = 10
+  const NEXT_LOAD_MORE_AMOUNT = 50
 
   useEffect(() => {
-    setFilteredCountries(state.countries.slice(0,10))
+    setFilteredCountries(state.countries.slice(0, INITIAL_LOAD_MORE_AMOUNT))
   }, [state.countries])
 
   useEffect(() => {
@@ -84,7 +86,7 @@ function App() {
   const handleLoadMoreCountries = (ev) => {
     ev.preventDefault()
     const { countries } = state
-    setFilteredCountries(countries.slice(0, filteredCountries.length + 50))
+    setFilteredCountries(countries.slice(0, filteredCountries.length + NEXT_LOAD_MORE_AMOUNT))
   }
 
   const renderLoader = () =>{
