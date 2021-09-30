@@ -54,9 +54,8 @@ function App() {
   }, [state.countries])
 
   useEffect(() => {
-    const nextSlice = state.countries.length - filteredCountries.length
-    const notMoreToLoad = nextSlice <= 0 || filteredCountries.length >= state.countries.length
-    setThereIsMoreToLoad(!notMoreToLoad)
+    const pendingToBeLoaded = state.countries.length - filteredCountries.length
+    setThereIsMoreToLoad(pendingToBeLoaded > 0)
   }, [filteredCountries, state.countries])
 
   // Load total results
